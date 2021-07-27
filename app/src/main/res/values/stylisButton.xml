@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ButtonsStyle" >
+        <item name="android:backgroundTint">#ddadaf</item>
+        <item name="android:textSize">@dimen/txt_size</item>
+        <item name="cornerRadius">@dimen/radiusBtn</item>
+        <item name="android:layout_width">@dimen/widthBtn</item>
+        <item name="android:layout_height">@dimen/height_btn</item>
+        <item name="android:textColor">#082567</item>
+        <item name="android:layout_margin">2dp</item>
+
+    </style>
+</resources>

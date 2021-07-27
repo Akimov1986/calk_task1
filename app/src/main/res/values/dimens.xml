@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="height_btn">60dp</dimen>
+    <dimen name="txt_size">25sp</dimen>
+    <dimen name="radiusBtn">23dp</dimen>
+    <dimen name="widthBtn">0dp</dimen>
+    <dimen name="width_EdTxt">0dp</dimen>
+    <dimen name="sizeTxtThemeMain">20sp</dimen>
+</resources>

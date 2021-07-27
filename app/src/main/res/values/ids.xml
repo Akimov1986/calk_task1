@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="key_1" type="id"/>
+    <item name="key_2" type="id"/>
+    <item name="key_3" type="id"/>
+    <item name="key_4" type="id"/>
+    <item name="key_5" type="id"/>
+    <item name="key_6" type="id"/>
+    <item name="key_7" type="id"/>
+    <item name="key_8" type="id"/>
+    <item name="key_9" type="id"/>
+    <item name="key_0" type="id"/>
+    <item name="key_dot" type="id"/>
+    <item name="key_division" type="id" />
+</resources>
