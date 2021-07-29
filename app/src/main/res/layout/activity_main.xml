@@ -9,7 +9,8 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/port"
+        app:srcCompat="@drawable/flowers"
+        android:scaleType="centerInside"
         tools:ignore="MissingConstraints" />
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/key_result"
