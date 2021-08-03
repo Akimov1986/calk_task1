@@ -1,17 +1,26 @@
 package com.example.homework2;
 
+import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 
-public class MainActivity<i> extends AppCompatActivity {
+import sharedPreferences.Editor;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    static final int MyTheme1 = 1;
+    static final int MyTheme2 = 2;
+
+    static final String KEY_SP = "sp";
+    static final String KEY_CURRENT_THEME = "current_theme";
 
     static String operator = "0";
     private Calculator calc;
@@ -52,7 +61,9 @@ public class MainActivity<i> extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(getRealId(getCurrentTheme()));
         setContentView(R.layout.activity_main);
+        initRadioButtons();
 
         calc = new Calculator();
         initView();
@@ -62,18 +73,29 @@ public class MainActivity<i> extends AppCompatActivity {
         text = findViewById(R.id.key_result);
         initButtonsClickListener();
     }
+    private void initRadioButtons() {
+        (findViewById(R.id.Theme1)).setOnClickListener(this);
+        (findViewById(R.id.Theme2)).setOnClickListener(this);
+        switch (getCurrentTheme()) {
+            case 1:
+                ((RadioButton) findViewById(R.id.Theme1)).setChecked(true);
+                break;
+
+            case 2:
+                ((RadioButton) findViewById(R.id.Theme2)).setChecked(true);
+                break;
+        }
+    }
 
     private void initButtonsClickListener() {
-        Button btn1 = findViewById(R.id.key_1);
-        Button btn2 = findViewById(R.id.key_2);
-        Button btn3 = findViewById(R.id.key_3);
-        Button btn4 = findViewById(R.id.key_4);
-        Button btn5 = findViewById(R.id.key_5);
-        Button btn6 = findViewById(R.id.key_6);
-        Button btn7 = findViewById(R.id.key_7);
-        Button btn8 = findViewById(R.id.key_8);
-        Button btn9 = findViewById(R.id.key_9);
-        Button btn0 = findViewById(R.id.key_0);
+        Button[] arrayButton = new Button[10];
+        for (int i = 0; i < 10; i++) {
+            String abc = "key_" + i;
+            int resID = getResources().getIdentifier(abc, "id", getPackageName());
+            arrayButton[i] = findViewById(resID);
+            arrayButton[i].setOnClickListener(numberButtonsClickListener);
+        }
+
         Button btn_plus = findViewById(R.id.key_addition);
         Button btn_min = findViewById(R.id.key_subtraction);
         Button btn_mult = findViewById(R.id.key_composition);
@@ -82,16 +104,7 @@ public class MainActivity<i> extends AppCompatActivity {
         Button btn_equal = findViewById(R.id.key_equally);
         Button btn_dot = findViewById(R.id.key_dot);
 
-        btn1.setOnClickListener(numberButtonsClickListener);
-        btn2.setOnClickListener(numberButtonsClickListener);
-        btn3.setOnClickListener(numberButtonsClickListener);
-        btn4.setOnClickListener(numberButtonsClickListener);
-        btn5.setOnClickListener(numberButtonsClickListener);
-        btn6.setOnClickListener(numberButtonsClickListener);
-        btn7.setOnClickListener(numberButtonsClickListener);
-        btn8.setOnClickListener(numberButtonsClickListener);
-        btn9.setOnClickListener(numberButtonsClickListener);
-        btn0.setOnClickListener(numberButtonsClickListener);
+
         btn_dot.setOnClickListener(numberButtonsClickListener);
         btn_clear.setOnClickListener(numberClearClickListener);
         btn_plus.setOnClickListener(operationPlusButtonsClickListener);
@@ -100,6 +113,7 @@ public class MainActivity<i> extends AppCompatActivity {
         btn_mult.setOnClickListener(operationMultButtonsClickListener);
         btn_equal.setOnClickListener(equalButtonsClickListener);
     }
+
 
     public void setOperator(String _operator) {
         if (calc.number1.equals("")) {
@@ -111,6 +125,7 @@ public class MainActivity<i> extends AppCompatActivity {
         operator = _operator;
         text.setText("");
     }
+
 
     public void Equals() {
         String str = text.getText().toString().trim();
@@ -153,5 +168,40 @@ public class MainActivity<i> extends AppCompatActivity {
         calc = savedInstanceState.getParcelable("calc");
         text = findViewById(R.id.key_result);
         text.setText(String.valueOf(calc.result));
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.Theme1:
+                setCurrentTheme(MyTheme1);
+                break;
+            case R.id.Theme2:
+                setCurrentTheme(MyTheme2);
+                break;
+        }
+        recreate();
+
+    }
+    private void setCurrentTheme(int currentTheme) {
+        SharedPreferences sharedPreferences = getSharedPreferences(KEY_SP, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(KEY_CURRENT_THEME, currentTheme);
+        editor.apply();
+    }
+    private int getCurrentTheme() {
+        SharedPreferences sharedPreferences = getSharedPreferences(KEY_SP, MODE_PRIVATE);
+        return sharedPreferences.getInt(KEY_CURRENT_THEME, -1);
+    }
+    private int getRealId(int currentTheme) {
+        switch (currentTheme) {
+            case MyTheme1:
+                return R.id.Theme1;
+            case MyTheme2:
+                return R.id.Theme2;
+            default:
+                return 0;
+
+        }
     }
 }
