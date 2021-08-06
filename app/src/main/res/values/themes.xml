@@ -21,7 +21,7 @@
         <item name="colorSecondary">@color/black</item>
 
     </style>
-    <style name="Theme2" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
+    <style name="Theme2" parent="Theme.AppCompat.Light">
         <item name="android:textStyle">italic</item>
         <item name="colorPrimary">@color/yellow</item>
     </style>

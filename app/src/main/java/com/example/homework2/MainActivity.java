@@ -1,6 +1,6 @@
 package com.example.homework2;
 
-import android.annotation.SuppressLint;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 
-import sharedPreferences.Editor;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     static final int MyTheme1 = 1;
@@ -74,15 +74,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initButtonsClickListener();
     }
     private void initRadioButtons() {
-        (findViewById(R.id.Theme1)).setOnClickListener(this);
-        (findViewById(R.id.Theme2)).setOnClickListener(this);
+        (findViewById(R.id.BtnTheme1)).setOnClickListener(this);
+        (findViewById(R.id.BtnTheme2)).setOnClickListener(this);
         switch (getCurrentTheme()) {
             case 1:
-                ((RadioButton) findViewById(R.id.Theme1)).setChecked(true);
+                ((RadioButton) findViewById(R.id.BtnTheme1)).setChecked(true);
                 break;
 
             case 2:
-                ((RadioButton) findViewById(R.id.Theme2)).setChecked(true);
+                ((RadioButton) findViewById(R.id.BtnTheme2)).setChecked(true);
                 break;
         }
     }
@@ -173,10 +173,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.Theme1:
+            case R.id.BtnTheme1:
                 setCurrentTheme(MyTheme1);
                 break;
-            case R.id.Theme2:
+            case R.id.BtnTheme2:
                 setCurrentTheme(MyTheme2);
                 break;
         }
@@ -196,9 +196,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int getRealId(int currentTheme) {
         switch (currentTheme) {
             case MyTheme1:
-                return R.id.Theme1;
+                return R.style.Theme1;
             case MyTheme2:
-                return R.id.Theme2;
+                return R.style.Theme2;
             default:
                 return 0;
 

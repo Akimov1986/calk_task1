@@ -13,14 +13,14 @@
         tools:ignore="MissingConstraints">
 
         <RadioButton
-            android:id="@+id/Theme1"
+            android:id="@+id/BtnTheme1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/_1"
             android:textSize="@dimen/txt_size" />
 
         <RadioButton
-            android:id="@+id/Theme2"
+            android:id="@+id/BtnTheme2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/_2"
