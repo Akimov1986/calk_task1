@@ -1,5 +1,6 @@
 package com.example.homework2;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -45,9 +46,13 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.BtnTheme1:
                 setCurrentTheme(MyTheme1);
+                Intent i = new Intent(SettingActivity.this,MainActivity.class);
+                startActivity(i);
                 break;
             case R.id.BtnTheme2:
                 setCurrentTheme(MyTheme2);
+                Intent intent = new Intent(SettingActivity.this,MainActivity.class);
+                startActivity(intent);
                 break;
         }
         recreate();
