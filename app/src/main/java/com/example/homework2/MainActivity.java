@@ -1,12 +1,10 @@
 package com.example.homework2;
 
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,17 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 
 
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    static final int MyTheme1 = 1;
-    static final int MyTheme2 = 2;
-
-    static final String KEY_SP = "sp";
-    static final String KEY_CURRENT_THEME = "current_theme";
+public class MainActivity extends AppCompatActivity {
 
     static String operator = "0";
     private Calculator calc;
     private EditText text;
+
 
     public View.OnClickListener numberButtonsClickListener = new View.OnClickListener() {
         @Override
@@ -61,9 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(getRealId(getCurrentTheme()));
         setContentView(R.layout.activity_main);
-        initRadioButtons();
 
         calc = new Calculator();
         initView();
@@ -72,19 +63,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         text = findViewById(R.id.key_result);
         initButtonsClickListener();
-    }
-    private void initRadioButtons() {
-        (findViewById(R.id.BtnTheme1)).setOnClickListener(this);
-        (findViewById(R.id.BtnTheme2)).setOnClickListener(this);
-        switch (getCurrentTheme()) {
-            case 1:
-                ((RadioButton) findViewById(R.id.BtnTheme1)).setChecked(true);
-                break;
-
-            case 2:
-                ((RadioButton) findViewById(R.id.BtnTheme2)).setChecked(true);
-                break;
-        }
     }
 
     private void initButtonsClickListener() {
@@ -168,40 +146,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         calc = savedInstanceState.getParcelable("calc");
         text = findViewById(R.id.key_result);
         text.setText(String.valueOf(calc.result));
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.BtnTheme1:
-                setCurrentTheme(MyTheme1);
-                break;
-            case R.id.BtnTheme2:
-                setCurrentTheme(MyTheme2);
-                break;
-        }
-        recreate();
-
-    }
-    private void setCurrentTheme(int currentTheme) {
-        SharedPreferences sharedPreferences = getSharedPreferences(KEY_SP, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(KEY_CURRENT_THEME, currentTheme);
-        editor.apply();
-    }
-    private int getCurrentTheme() {
-        SharedPreferences sharedPreferences = getSharedPreferences(KEY_SP, MODE_PRIVATE);
-        return sharedPreferences.getInt(KEY_CURRENT_THEME, -1);
-    }
-    private int getRealId(int currentTheme) {
-        switch (currentTheme) {
-            case MyTheme1:
-                return R.style.Theme1;
-            case MyTheme2:
-                return R.style.Theme2;
-            default:
-                return 0;
-
-        }
     }
 }
