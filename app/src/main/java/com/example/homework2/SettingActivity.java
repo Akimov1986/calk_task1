@@ -18,10 +18,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        setCurrentTheme(getRealId(getCurrentTheme()));
+        //setCurrentTheme(getRealId(getCurrentTheme()));
         super.onCreate(savedInstanceState);
-        setTheme(getRealId(getCurrentTheme()));
+        //setTheme(getRealId(getCurrentTheme()));
         setContentView(R.layout.activity_setting);
         initRadioButtons();
     }
@@ -46,12 +45,12 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.BtnTheme1:
                 setCurrentTheme(MyTheme1);
-                Intent i = new Intent(SettingActivity.this,MainActivity.class);
+                Intent i = new Intent(SettingActivity.this, MainActivity.class);
                 startActivity(i);
                 break;
             case R.id.BtnTheme2:
                 setCurrentTheme(MyTheme2);
-                Intent intent = new Intent(SettingActivity.this,MainActivity.class);
+                Intent intent = new Intent(SettingActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
         }

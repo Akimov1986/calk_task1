@@ -2,6 +2,7 @@ package com.example.homework2;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +14,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 
 
+
 public class MainActivity extends AppCompatActivity {
+    static final int MyTheme1 = 1;
+    static final int MyTheme2 = 2;
+
+    static final String KEY_SP = "sp";
+    static final String KEY_CURRENT_THEME = "current_theme";
+
+    private int getCurrentTheme() {
+        SharedPreferences sharedPreferences = getSharedPreferences(KEY_SP, MODE_PRIVATE);
+        return sharedPreferences.getInt(KEY_CURRENT_THEME, -1);
+    }
+
+    private int getRealId(int currentTheme) {
+        switch (currentTheme) {
+            case MyTheme1:
+                return R.style.Theme1;
+            case MyTheme2:
+                return R.style.Theme2;
+            default:
+                return 0;
+
+        }
+
+    }
 
     static String operator = "0";
     private Calculator calc;
@@ -55,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(getRealId(getCurrentTheme()));
         setContentView(R.layout.activity_main);
 
         calc = new Calculator();
